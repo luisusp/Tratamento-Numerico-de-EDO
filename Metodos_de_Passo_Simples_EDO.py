@@ -100,12 +100,14 @@ def implicit_euler_method(y0, n, t0, T):
     return (y_n, t_n)
 
 def g(t,y,h,f):
-    
+    '''
+        Função auxiliar para o Método de Euler Aprimorado
+    '''
     k1 = f(t, y)
     k2 = f(t+h, y + h*k1)
 
     
-    return 1/2*(k1 + k2) 
+    return (1/2) * (k1 + k2) 
 
 def improved_euler_method(y0, n, t0, T):
     '''
