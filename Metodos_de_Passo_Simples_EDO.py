@@ -7,7 +7,6 @@ MAP5725 - TNEDO - 2021
 e-mail: luislopes@ime.usp.br
 """
 
-import math
 import matplotlib.pyplot as plt
 import numpy as np
 
