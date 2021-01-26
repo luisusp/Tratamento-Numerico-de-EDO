@@ -2,25 +2,20 @@
 IME-USP
 MAP5725 - TNEDO - 2021
 
-@author: luis Eduardo
+@author: Luis Eduardo
 
 e-mail: luislopes@ime.usp.br
+
+www.ime.usp.br/~luislopes
 """
 
 import matplotlib.pyplot as plt
 import numpy as np
 
-def plot_grafico(t, y1, y2):
+def plot_grafico(y1, y2):
 
-    plt.plot(t, y1, 'k:', color='black', linestyle=(0,(1,1,3,1)),label = 'x(t)  (in x units)')
-    plt.xlabel('time t   (in units)')
-    plt.ylabel('x(t)  state variables')
-    plt.title('Numerical Approximation of State Variables for n = {} '.format(n))
-    plt.legend()
-    plt.show()
-
-    plt.plot(t, y2, 'k--', label = 'y(t)  (in y units)')
-    plt.xlabel('time t   (in units)')
+    plt.plot(y1, y2, 'k:', color='black', linestyle=(0,(1,1,3,1)),  label = '(x(t), y(t))')
+    plt.xlabel('x(t)  state variables')
     plt.ylabel('y(t)  state variables')
     plt.title('Numerical Approximation of State Variables for n = {} '.format(n))
     plt.legend()
@@ -131,8 +126,8 @@ def improved_euler_method(y0, n, t0, T):
 
 # Intervalo de tempo t em [t_0, T]
 tn = np.sqrt(np.pi)                 # Tempo inicial (dado)
-T  = 2 * (np.pi)                    # Tempo final (escolhido)
-# T  = 4 * (np.pi)                    # Tempo final (escolhido - caso extra)
+# T  = 2 * (np.pi)                    # Tempo final (escolhido)
+T  = 4 * (np.pi)                    # Tempo final (escolhido - caso extra)
 # T  = (np.pi)                        # Tempo final (escolhido - caso extra)
 
 # Condição inicial: f(x_0, y_0) = (0, -2sqrt(pi))
@@ -144,36 +139,36 @@ n = int(input("n = "))
 #Solução Exata
 print('Solução exata: ', solucao_exata(T))
 
-#Solução do Método de Euler Explícito
-sol, t = explicit_euler_method(y0, n, tn, T)
-print('Euler Explicito - Solução aproximada: ', sol[-1])
+# #Solução do Método de Euler Explícito
+# sol, t = explicit_euler_method(y0, n, tn, T)
+# print('Euler Explicito - Solução aproximada: ', sol[-1])
 
-#Gráfico do Método de Euler Explícito 
-plot_grafico(t, sol[:, 0], sol[:, 1])
+# #Gráfico do Método de Euler Explícito 
+# plot_grafico(sol[:, 0], sol[:, 1])
 
-#Erro Global - Euler Explícito
-e_k = solucao_exata(T) - sol[-1]
-print('Erro de Euler Explicito = ', e_k)
+# #Erro Global - Euler Explícito
+# e_k = solucao_exata(T) - sol[-1]
+# print('Erro de Euler Explicito = ', e_k)
 
-#Solução do Método de Euler Implícito
-sol = implicit_euler_method(y0, n, tn, T)[0]
-t = implicit_euler_method(y0, n, tn, T)[1]
-sol = np.array(sol) 
-print('Euler Implicito - Solução aproximada: ', sol[n]) 
+# #Solução do Método de Euler Implícito
+# sol = implicit_euler_method(y0, n, tn, T)[0]
+# t = implicit_euler_method(y0, n, tn, T)[1]
+# sol = np.array(sol) 
+# print('Euler Implicito - Solução aproximada: ', sol[n]) 
 
-#Gráfico do Método de Euler Implícito 
-plot_grafico(t, np.array(sol[:, 0]), np.array(sol[:, 1]))
+# #Gráfico do Método de Euler Implícito 
+# plot_grafico(np.array(sol[:, 0]), np.array(sol[:, 1]))
 
-#Erro Global - Euler Implícito
-e_k = solucao_exata(T) - sol[n]
-print('Erro de Euler Implicito = ', e_k)
+# #Erro Global - Euler Implícito
+# e_k = solucao_exata(T) - sol[n]
+# print('Erro de Euler Implicito = ', e_k)
 
 #Solução do Método de Euler Aprimorado
 sol, t = improved_euler_method(y0, n, tn, T)
 print('Euler Aprimorado - Solução aproximada: ', sol[-1])
 
 #Gráfico do Método de Euler Aprimorado 
-plot_grafico(t, sol[:, 0], sol[:, 1])
+plot_grafico(sol[:, 0], sol[:, 1])
 
 #Erro Global - Euler #Gráfico do Método de Euler Aprimorado 
 e_k = solucao_exata(T) - sol[-1]
