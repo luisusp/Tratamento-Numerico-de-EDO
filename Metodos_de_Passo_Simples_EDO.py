@@ -134,39 +134,46 @@ y0 = np.array([0, -2 * np.sqrt(np.pi)])
 n = int(input("n = "))
 
 #Solução Exata
-print('Solução exata: ', solucao_exata(T))
+print('Solução exata: ', solucao_exata(T), " = ", max(abs(solucao_exata(T))))
 
-#Solução do Método de Euler Explícito
+#Solução e Erro Global - Método de Euler Explícito
 sol, t = explicit_euler_method(y0, n, tn, T)
-print('Euler Explicito - Solução aproximada: ', sol[-1])
+e_k = abs(solucao_exata(T) - sol[-1])
+
+print("--------------------------------------------------------------------\n");
+print("  n\tEuler Explícito\tErro Global de Disc.\n");
+print("--------------------------------------------------------------------\n");
+print(n, max(abs(sol[-1])), max(e_k))
+print("\n");
+print("*    *    *    *    *    *    *    *    *    *    *    *    *    * \n");
 
 #Gráfico do Método de Euler Explícito 
 plot_grafico(sol[:, 0], sol[:, 1])
 
-#Erro Global - Euler Explícito
-e_k = solucao_exata(T) - sol[-1]
-print('Erro de Euler Explicito = ', e_k)
-
-#Solução do Método de Euler Implícito
+#Solução e Erro Global - Método de Euler Implícito
 sol = implicit_euler_method(y0, n, tn, T)[0]
 t = implicit_euler_method(y0, n, tn, T)[1]
 sol = np.array(sol) 
-print('Euler Implicito - Solução aproximada: ', sol[n]) 
+e_k = abs(solucao_exata(T) - sol[n])
+
+print("--------------------------------------------------------------------\n");
+print("  n\tEuler Implícito\tErro Global de Disc.\n");
+print("--------------------------------------------------------------------\n");
+print(n, max(abs(sol[n])), max(e_k))
+print("\n");
+print("*    *    *    *    *    *    *    *    *    *    *    *    *    * \n");
 
 #Gráfico do Método de Euler Implícito 
 plot_grafico(np.array(sol[:, 0]), np.array(sol[:, 1]))
 
-#Erro Global - Euler Implícito
-e_k = solucao_exata(T) - sol[n]
-print('Erro de Euler Implicito = ', e_k)
-
-#Solução do Método de Euler Aprimorado
+#Solução e Erro Global - Método de Euler Aprimorado
 sol, t = improved_euler_method(y0, n, tn, T)
-print('Euler Aprimorado - Solução aproximada: ', sol[-1])
+e_k = abs(solucao_exata(T) - sol[-1])
+
+print("--------------------------------------------------------------------\n");
+print("  n\tEuler Aprimorado\tErro Global de Disc.\n");
+print("--------------------------------------------------------------------\n");
+print(n, max(abs(sol[-1])), max(e_k))
 
 #Gráfico do Método de Euler Aprimorado 
 plot_grafico(sol[:, 0], sol[:, 1])
-
-#Erro Global - Euler #Gráfico do Método de Euler Aprimorado 
-e_k = solucao_exata(T) - sol[-1]
-print('Erro de Euler Aprimorado = ', e_k)
